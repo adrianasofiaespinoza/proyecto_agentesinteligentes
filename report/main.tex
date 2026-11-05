@@ -352,7 +352,7 @@ Env. & Method & Final mean & Solved & Steps to thr. & $Q(s_0)$ est./act. \\
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.82\textwidth]{figures/qualitative_frames.png}
-\caption{Qualitative evidence (frames from the recorded episodes, evaluation seed 20000). Top: DQN on CartPole (seed 123) keeps the pole upright for the full 500 steps. Middle: Double DQN on LunarLander (seed 42) lands successfully (return 288.8); the episode ends at step 248 when the lander comes to rest. Bottom: DQN with learning rate $10^{-4}$ (seed 42) reaches the pad but keeps firing its engines until the 1000-step limit (return 1.9).}
+\caption{Qualitative evidence (frames from the recorded episodes, evaluation seed 20000). Top: DQN on CartPole (seed 123) keeps the pole upright for the full 500 steps. Middle: a successful LunarLander landing (seed 42, return $\approx288$); the episode ends at step 248 when the lander comes to rest. Bottom: DQN with learning rate $10^{-4}$ (seed 42) reaches the pad but keeps firing its engines until the 1000-step limit (return 1.9).}
 \label{fig:frames}
 \end{figure*}
 
@@ -410,7 +410,7 @@ On a small problem, a well-discretised table beat DQN in final return, consisten
 
 % ==================================================================
 \section*{Reproducibility}
-All agents are implemented in plain Python and PyTorch, without ready-made RL agents. The repository (\url{https://github.com/adrianasofiaespinoza/proyecto_agentesinteligentes}) contains the source, JSON configurations, per-run training and evaluation logs (CSV files), trained weights and GIFs, and its README gives one command per experiment and figure.
+All agents are implemented in plain Python and PyTorch, without ready-made RL agents. The repository (\url{https://github.com/adrianasofiaespinoza/AgentesInteligentes_Project}) contains the source, JSON configurations, logs, trained weights and GIFs, and its README gives one command per experiment and figure.
 
 \section*{AI-Use Statement}
 Generative AI was used under the course policy. Claude (Anthropic) was used by A.~Espinoza to implement the DQN agent and its variants, the experiment, plotting and GIF scripts, to reproduce the Q-learning runs with the shared protocol, to diagnose results (e.g.\ the time-limit behaviour of the $\text{lr}=10^{-4}$ agent), and to draft and edit this paper. T.~Chilca\~{n}an used ChatGPT (OpenAI) to support the implementation, debugging and analysis of the tabular Q-learning agent. All reported numbers were produced by our own runs and checked against the logs; environment dimensions were verified by instantiating each environment; references were checked against the original publications. Both authors reviewed all code and can explain it. The main prompts are listed in Appendix~A.

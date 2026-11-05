@@ -157,7 +157,7 @@ Everything else (network, buffer, schedule, hyperparameters) is identical to van
 
 \textbf{Hyperparameters} are listed in Table~\ref{tab:hparams}. For DQN on CartPole, an initial configuration (learning rate $5\times10^{-4}$, buffer 50k, batch 64, $C=500$) was run once on seeds 42 and 123 and was clearly unstable (one seed ended at 107). We then compared configurations only on held-out seeds 0 and 1 and kept the one in Table~\ref{tab:hparams}, which ended at 500 on both. The LunarLander configuration was validated with a single run before launching all seeds. The tabular configuration comes from the design study in Section~\ref{sec:tier1}.
 
-\textbf{Hardware and software.} All runs used CPU only, on a laptop with 16 logical cores and 16\,GB of RAM (Arch Linux, Python 3.14, PyTorch, Gymnasium 1.x). Each process used one thread. The three CartPole seeds ran in parallel; the 24 LunarLander runs (8 configurations $\times$ 3 seeds) ran concurrently, which inflated their wall-clock time: a single LunarLander run alone trained in 5.3 minutes, against about 40 minutes when sharing the CPU. LunarLander times are therefore only comparable with each other.
+\textbf{Hardware and software.} All runs used CPU only, on two laptops: one with 16 logical cores and 16\,GB of RAM (Arch Linux, Python 3.14, PyTorch, Gymnasium 1.x; one thread per process), used for most DQN runs, all LunarLander runs and every reported time; and one with 4 cores and 8\,GB of RAM, used for development, plotting and part of Tier~1. The 24 LunarLander runs shared the CPU, so their wall-clock times (about 40 minutes, against 5.3 for a single run alone) are only comparable with each other.
 
 \begin{table}[t]
 \centering
@@ -352,7 +352,7 @@ Env. & Method & Final mean & Solved & Steps to thr. & $Q(s_0)$ est./act. \\
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.82\textwidth]{figures/qualitative_frames.png}
-\caption{Qualitative evidence (frames from the recorded episodes, evaluation seed 20000). Top: DQN on CartPole (seed 123) keeps the pole upright for the full 500 steps. Middle: a successful LunarLander landing (seed 42, return $\approx288$); the episode ends at step 248 when the lander comes to rest. Bottom: DQN with learning rate $10^{-4}$ (seed 42) reaches the pad but keeps firing its engines until the 1000-step limit (return 1.9).}
+\caption{Qualitative evidence (frames from the recorded episodes, evaluation seed 20000). Top: DQN on CartPole (seed 123) keeps the pole upright for the full 500 steps. Middle: Double DQN on LunarLander (seed 42) lands successfully (return 288.8); the episode ends at step 248 when the lander comes to rest. Bottom: DQN with learning rate $10^{-4}$ (seed 42) reaches the pad but keeps firing its engines until the 1000-step limit (return 1.9).}
 \label{fig:frames}
 \end{figure*}
 
@@ -410,10 +410,10 @@ On a small problem, a well-discretised table beat DQN in final return, consisten
 
 % ==================================================================
 \section*{Reproducibility}
-All agents are implemented in plain Python and PyTorch, without ready-made RL agents. The repository (\url{https://github.com/adrianasofiaespinoza/AgentesInteligentes_Project}) contains the source, JSON configurations, logs, trained weights and GIFs, and its README gives one command per experiment and figure.
+All agents are implemented in plain Python and PyTorch, without ready-made RL agents. The repository (\url{https://github.com/adrianasofiaespinoza/proyecto_agentesinteligentes}) contains the source, JSON configurations, per-run training and evaluation logs (CSV files), trained weights and GIFs, and its README gives one command per experiment and figure.
 
 \section*{AI-Use Statement}
-Generative AI was used under the course policy. Claude (Anthropic) was used by A.~Espinoza to implement the DQN agent and its variants, the experiment, plotting and GIF scripts, to reproduce the Q-learning runs with the shared protocol, to diagnose results (e.g.\ the time-limit behaviour of the $\text{lr}=10^{-4}$ agent), and to draft and edit this paper. T.~Chilca\~{n}an used ChatGPT (OpenAI) to support the implementation, debugging and analysis of the tabular Q-learning agent. All reported numbers were produced by our own runs and checked against the logs; environment dimensions were verified by instantiating each environment; references were checked against the original publications. Both authors reviewed all code and can explain it. The main prompts are listed in Appendix~A.
+Generative AI was used under the course policy. Claude (Anthropic) was used by A.~Espinoza to implement the DQN agent and its variants, the experiment, plotting and GIF scripts, to reproduce the Q-learning runs with the shared protocol, to diagnose results (e.g.\ the time-limit behaviour of the $\text{lr}=10^{-4}$ agent), and to draft and edit this paper. T.~Chilca\~{n}an used ChatGPT (OpenAI) to support the implementation, debugging and analysis of the tabular Q-learning agent. All reported numbers were produced by our own runs and checked against the logs; environment dimensions were verified by instantiating each environment; references were checked against the original publications. Both authors reviewed all code and can explain it.
 
 \small
 \begin{thebibliography}{99}\setlength{\itemsep}{0pt}
@@ -434,17 +434,6 @@ Generative AI was used under the course policy. Claude (Anthropic) was used by A
 
 % ==================================================================
 \appendix
-\section{Main Prompts (AI-Use Appendix)}
-Prompts were written in Spanish; English translations of the most important ones follow.
-\begin{enumerate}
-  \item ``I have to do all of Tier 3 [\dots] To compare our Tier 1 algorithms properly we must use the same general conditions: CartPole-v1, 300,000 steps per seed, seeds 42, 123 and 456, evaluations every 10,000 steps with 10 episodes, final evaluation of 100 episodes without exploration (seeds 20000--20099), target mean return $\ge 475$; record mean, standard deviation and training time. The DQN hyperparameters can be tuned for your implementation.'' (Assignment description attached.)
-  \item ``Just give me the scripts, I'll run them myself.''
-  \item ``What's next? [\dots] How long will all of Tier 3 take to run?''
-  \item Pasted outputs of the summary script for Tier 2 and Tier 3, asking for an interpretation.
-  \item ``Here are the Q-learning results from Tier 1 so you can do the comparison with DQN.'' (Q-learning notebooks and CSV files attached.)
-  \item ``Write the paper in English, separated clearly by sections, with images and plots; before you start, tell me what will go in each part.''
-\end{enumerate}
-
 \section{Additional Figures}
 Fig.~\ref{fig:appendix} shows additional diagnostics on LunarLander-v3 referenced in Section~5 (mean over 3 seeds, band $\pm1$ std).
 

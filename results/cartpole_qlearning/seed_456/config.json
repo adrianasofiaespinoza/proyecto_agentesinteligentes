@@ -1,0 +1,18 @@
+{
+  "exp_name": "cartpole_qlearning",
+  "env_id": "CartPole-v1",
+  "total_steps": 300000,
+  "n_bins": 10,
+  "alpha": 0.1,
+  "gamma": 0.99,
+  "eps_start": 1.0,
+  "eps_end": 0.05,
+  "eps_decay_steps": 150000,
+  "eval_every": 10000,
+  "eval_episodes": 10,
+  "eval_seed_start": 10000,
+  "final_eval_episodes": 100,
+  "final_eval_seed_start": 20000,
+  "success_threshold": 475,
+  "seed": 456
+}

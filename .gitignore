@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+.ipynb_checkpoints/
+
+# Entornos virtuales
+.venv/
+.agentesinteligentes/
+
+# Logs de consola
+logs/
+
+# Auxiliares de LaTeX
+*.aux
+*.log
+*.out

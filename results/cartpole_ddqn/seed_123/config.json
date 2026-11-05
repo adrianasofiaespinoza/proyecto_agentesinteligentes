@@ -1,0 +1,31 @@
+{
+  "exp_name": "cartpole_ddqn",
+  "env_id": "CartPole-v1",
+  "total_steps": 300000,
+  "eval_every": 10000,
+  "eval_episodes": 10,
+  "eval_seed_start": 10000,
+  "final_eval_episodes": 100,
+  "final_eval_seed_start": 20000,
+  "success_threshold": 475,
+  "gamma": 0.99,
+  "lr": 0.0001,
+  "batch_size": 128,
+  "buffer_size": 100000,
+  "hidden": [
+    128,
+    128
+  ],
+  "learning_starts": 1000,
+  "train_freq": 1,
+  "target_update_freq": 1000,
+  "eps_start": 1.0,
+  "eps_end": 0.05,
+  "exploration_fraction": 0.1,
+  "max_grad_norm": 10.0,
+  "double": true,
+  "dueling": false,
+  "use_target_network": true,
+  "use_replay": true,
+  "seed": 123
+}
